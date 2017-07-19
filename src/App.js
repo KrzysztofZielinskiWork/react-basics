@@ -8,9 +8,6 @@ class App extends Component {
     return (
       <div className="App">
         <AppNav />
-        <div>
-          <h1>Hello World </h1>
-        </div>
       </div>
     );
   }
