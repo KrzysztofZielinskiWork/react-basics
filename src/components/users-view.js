@@ -121,7 +121,6 @@ export default class UsersView extends React.Component {
               grade={this.handleClickSortByGrade}
               reset={this.handleClickUnsort}
             />
-
             <div>
               <Button bsStyle='primary' onClick={this.handleClickSortByName}> Sort by name </Button>
               <Button bsStyle='primary' onClick={this.handleClickSortBySurname}> Sort by surname </Button>
@@ -129,7 +128,6 @@ export default class UsersView extends React.Component {
               <Button bsStyle='primary' onClick={this.handleClickSortByAge}> sort by age </Button>
               <Button bsStyle='primary' onClick={this.handleClickSortByGrade}> sort by grade </Button>
             </div>
-
             <Table striped bordered condensed >
               <thead>
                 <tr>

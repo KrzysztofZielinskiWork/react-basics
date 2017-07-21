@@ -2,7 +2,7 @@ import React from 'react';
 import './../css/app-nav.css';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function AppNav() {
   return (
