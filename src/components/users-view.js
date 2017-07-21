@@ -14,28 +14,40 @@ export default class UsersView extends React.Component {
       activeFilterName: ''
     }
 
-    this.asc = this.asc.bind(this)
+    this.ascId = this.ascId.bind(this)
+    this.ascName = this.ascName.bind(this)
+    this.ascSurname = this.ascSurname.bind(this)
     this.ascGrade = this.ascGrade.bind(this)
+    this.ascAge = this.ascAge.bind(this)
 
-    this.desc = this.desc.bind(this)
+    this.descName = this.descName.bind(this)
+    this.descSurname = this.descSurname.bind(this)
     this.descGrade = this.descGrade.bind(this)
+    this.descAge = this.descAge.bind(this)
 
   }
 
-  handleClickSortByName = () => console.log('name');
-
-  handleSortFilter = () =>
-    this.state.filter === this.asc ?
+  handleClickSortByName = () =>
+    this.state.filter === this.ascName ?
       this.setState({
-        filter: this.desc,
-        filterName: 'Sort'
+        filter: this.descName,
+        activeFilterName: 'Sort'
       }) :
       this.setState({
-        filter: this.asc,
-        filterName: 'Sort'
+        filter: this.ascName,
+        activeFilterName: 'Sort'
       })
 
-  handleClickSortBySurname = () => console.log('surname');
+  handleClickSortBySurname = () =>
+    this.state.filter === this.ascSurname ?
+      this.setState({
+        filter: this.descSurname,
+        activeFilterName: 'Sort'
+      }) :
+      this.setState({
+        filter: this.ascSurname,
+        activeFilterName: 'Sort'
+      })
 
   handleClickSortByGender = () => this.state.filter === 'Male' ?
     this.setState({
@@ -47,20 +59,45 @@ export default class UsersView extends React.Component {
       activeFilterName: 'Gender'
     })
 
-  handleClickSortByAge = () => console.log('age');
-  handleClickSortByGrade = () => console.log('grade');
+  handleClickSortByAge = () =>
+    this.state.filter === this.ascAge ?
+      this.setState({
+        filter: this.descAge,
+        activeFilterName: 'Sort'
+      }) :
+      this.setState({
+        filter: this.ascAge,
+        activeFilterName: 'Sort'
+      })
+
+  handleClickSortByGrade = () =>
+    this.state.filter === this.descGrade ?
+      this.setState({
+        filter: this.ascGrade,
+        activeFilterName: 'Grade'
+      }) :
+      this.setState({
+        filter: this.descGrade,
+        activeFilterName: 'Grade'
+      })
+
   handleClickUnsort = () =>
     this.setState({
-      filter: '',
+      filter: this.ascId,
       activeFilterName: 'unset'
     })
 
 
-  asc(a, b) { return (a.first_name > b.first_name) ? 1 : ((b.first_name > a.first_name) ? -1 : 0); }
+  ascId(a, b) { return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0); }
+  ascName(a, b) { return (a.first_name > b.first_name) ? 1 : ((b.first_name > a.first_name) ? -1 : 0); }
+  ascSurname(a, b) { return (a.last_name > b.last_name) ? 1 : ((b.last_name > a.last_name) ? -1 : 0); }
   ascGrade(a, b) { return (a.grade > b.grade) ? 1 : ((b.grade > a.grade) ? -1 : 0); }
+  ascAge(a, b) { return (a.age > b.age) ? 1 : ((b.age > a.age) ? -1 : 0); }
 
-  desc(a, b) { return (a.first_name < b.first_name) ? 1 : ((b.first_name < a.first_name) ? -1 : 0); }
+  descName(a, b) { return (a.first_name < b.first_name) ? 1 : ((b.first_name < a.first_name) ? -1 : 0); }
+  descSurname(a, b) { return (a.last_name < b.last_name) ? 1 : ((b.last_name < a.last_name) ? -1 : 0); }
   descGrade(a, b) { return (a.grade < b.grade) ? 1 : ((b.grade < a.grade) ? -1 : 0); }
+  descAge(a, b) { return (a.age < b.age) ? 1 : ((b.age < a.age) ? -1 : 0); }
 
   componentWillMount() {
     this.setState({
@@ -108,7 +145,22 @@ export default class UsersView extends React.Component {
               <tbody>
                 {
                   this.state.activeFilterName === 'unset' &&
-                  users.map(
+                  users.sort(this.state.filter).map(
+                    (user, index) =>
+                      <tr key={index}>
+                        <td key={index + 1}>{user.id}.</td>
+                        <td key={index}><img src={user.avatar} alt={user.first_name} /></td>
+                        <td key={index + 2}>{user.first_name}</td>
+                        <td key={index + 3}>{user.last_name}</td>
+                        <td key={index + 4}>{user.gender}</td>
+                        <td key={index + 5}>{user.age}</td>
+                        <td key={index + 6}>{user.grade}</td>
+                      </tr>
+                  )
+                }
+                {
+                  this.state.activeFilterName === 'Sort' &&
+                  users.sort(this.state.filter).map(
                     (user, index) =>
                       <tr key={index}>
                         <td key={index + 1}>{user.id}.</td>
@@ -133,6 +185,36 @@ export default class UsersView extends React.Component {
                       <td key={index + 5}>{user.age}</td>
                       <td key={index + 6}>{user.grade}</td>
                     </tr>
+                  )
+                }
+                {
+                  this.state.activeFilterName === 'Grade' &&
+                  users.sort(this.state.filter).map(
+                    (user, index) =>
+                      <tr key={index}>
+                        <td key={index + 1}>{user.id}.</td>
+                        <td key={index}><img src={user.avatar} alt={user.first_name} /></td>
+                        <td key={index + 2}>{user.first_name}</td>
+                        <td key={index + 3}>{user.last_name}</td>
+                        <td key={index + 4}>{user.gender}</td>
+                        <td key={index + 5}>{user.age}</td>
+                        <td key={index + 6}>{user.grade}</td>
+                      </tr>
+                  )
+                }
+                {
+                  this.state.activeFilterName === 'Age' &&
+                  users.sort(this.state.filter).map(
+                    (user, index) =>
+                      <tr key={index}>
+                        <td key={index + 1}>{user.id}.</td>
+                        <td key={index}><img src={user.avatar} alt={user.first_name} /></td>
+                        <td key={index + 2}>{user.first_name}</td>
+                        <td key={index + 3}>{user.last_name}</td>
+                        <td key={index + 4}>{user.gender}</td>
+                        <td key={index + 5}>{user.age}</td>
+                        <td key={index + 6}>{user.grade}</td>
+                      </tr>
                   )
                 }
               </tbody>
