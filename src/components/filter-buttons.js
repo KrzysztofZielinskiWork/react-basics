@@ -17,13 +17,13 @@ export default function FilterButtons(props) {
         buttons={[
           {
             handleClick: props.first_name,
-            label: 'first name',
+            label: 'first_name',
             activeFilterName: props.activeFilterName,
             filter: props.filter
           },
           {
             handleClick: props.last_name,
-            label: 'last name',
+            label: 'last_name',
             activeFilterName: props.activeFilterName,
             filter: props.filter
           },
@@ -42,6 +42,12 @@ export default function FilterButtons(props) {
           {
             handleClick: props.grade,
             label: 'grade',
+            activeFilterName: props.activeFilterName,
+            filter: props.filter
+          },
+          {
+            handleClick: props.reset,
+            label: 'reset',
             activeFilterName: props.activeFilterName,
             filter: props.filter
           },

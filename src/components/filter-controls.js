@@ -6,7 +6,18 @@ export default function FilterControls(props) {
         <div>
             {
                 props.buttons.map((button, index) =>
-                    <Button key={index} onClick={button.handleClick}>Sort By {button.label}</Button>
+                    button.label === 'reset' ?
+                        <Button key={index}
+                            onClick={button.handleClick}
+                            bsStyle={button.activeFilterName === button.label ? 'danger' : 'info'}
+                        >{button.label}
+                        </Button> :
+                        <Button
+                            key={index}
+                            onClick={button.handleClick}
+                            bsStyle={button.activeFilterName === button.label ? 'danger' : 'info'}
+                        >Sort by {button.label}
+                        </Button>
                 )
             }
         </div>
